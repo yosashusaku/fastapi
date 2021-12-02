@@ -1,10 +1,11 @@
-FROM python:3.10-alpine
-ENV PYTHONUMBUFFERED=1
+FROM python:3.10-buster
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /src
 
 RUN pip install poetry
-COPY project.toml* poetry.lock* ./
+
+COPY pyproject.toml* poetry.lock* ./
 
 RUN poetry config virtualenvs.in-project true
 RUN if [ -f pyproject.toml ]; then poetry install; fi
